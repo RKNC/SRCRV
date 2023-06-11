@@ -1,47 +1,67 @@
-import React, {useState} from "react"
+import React, {useEffect, useState} from "react"
 import axios from "axios"
 import {Link, useNavigate} from "react-router-dom"
 //Importas css
 
 export default function EliminarVuelo(){
+    const [id, setID]= useState(null)
+    const [listavuelos, setListavuelos]=useState('')
+    const getVuelos= async()=>{    
+        const url='http://localhost:9000/api/showflights/'
+        const {data}= await axios.get(url)
+        setListavuelos(data)
+    }
 
+    useEffect(()=>{
+        getVuelos()
+    })
+    
+    const comprobarCambiosID = (event) => {
+        setID(event.target.value)
+    }
 
-
+    const deleteFlight= async () =>{
+        const url= 'http://localhost:9000/api/deleteflight/'+id+'#'
+        const response = await axios.delete(url);
+        alert("Vuelo eliminado")
+        console.log('Respuesta del servidor:', response.data);
+    }
+    const vuelos= Object.values(listavuelos)
 
     return(
         <body>
             <h1>Vuelos Registrados</h1>
-
-            <table>
-                <tr>
-                <th>Nombre de la Aerolínea</th>
-                <th>Categorías Disponibles</th>
-                <th>Precio</th>
-                <th>Cantidad de Asientos Disponibles</th>
-                <th>Fecha y Hora de Llegada/Ida</th>
-                <th>Acciones</th>
-                </tr>
-                <tr>
-                <td class="nombre-aerolinea">Aerolínea 1</td>
-                <td class="categorias-disponibles">Categoría 1, Categoría 2</td>
-                <td class="precio">$100</td>
-                <td class="asientos-disponibles">150</td>
-                <td class="fecha-hora">2023-05-28 10:00 AM</td>
-                <td>
-                    <button class="boton-eliminar">Eliminar</button>
-                </td>
-                </tr>
-                <tr>
-                <td class="nombre-aerolinea">Aerolínea 2</td>
-                <td class="categorias-disponibles">Categoría 3</td>
-                <td class="precio">$200</td>
-                <td class="asientos-disponibles">100</td>
-                <td class="fecha-hora">2023-05-29 3:30 PM</td>
-                <td>
-                    <button class="boton-eliminar">Eliminar</button>
-                </td>
-                </tr>
-            </table>
-            </body>
+            <table id="listaVuelos">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Aerolínea</th>
+                            <th>Partida</th>
+                            <th>Destino</th>
+                            <th>Precio</th>
+                            <th>Cantidad</th>
+                            <th>Fecha del vuelo</th>
+                            <th>Hora de salida</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {vuelos.map((datos)=>(
+                                <tr>
+                                    <td>{datos.id}</td>
+                                    <td>{datos.aerolinea}</td>
+                                    <td>{datos.origen}</td>
+                                    <td>{datos.destino}</td>
+                                    <td>{datos.precio}</td>
+                                    <td>{datos.cantidad}</td>
+                                    <td>{datos.fechavuelo}</td>
+                                    <td>{datos.horasalida}</td>
+                                </tr>
+                        ))}
+                    </tbody>
+                </table>
+                <h3>Recuerde que borrar un vuelo es permanente</h3>
+                <input type="int" name="id" placeholder="ID del vuelo a eliminar" onChange={comprobarCambiosID} required value={id}></input><br></br><br></br>
+                <button id="btnDelete" onClick={deleteFlight}>Borrar</button>
+        </body>
     )
 }

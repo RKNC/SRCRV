@@ -45,6 +45,7 @@ export default function RegistroVuelo(){
                 cantidad: cantidad,
                 fechavuelo: fechavuelo,
                 horasalida: horasalida,
+                id: null
             }
             const url='http://localhost:9000/api/registerflights'
             const {formData:res}= await axios.post(url, formData)

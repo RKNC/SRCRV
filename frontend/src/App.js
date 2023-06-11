@@ -4,6 +4,7 @@ import Login from "./pages/login"
 import Register from "./pages/register"
 import RegistroVuelos from "./pages/registroVuelos"
 import MostrarVuelos from "./pages/mostrarVuelos"
+import EliminarVuelo from "./pages/eliminarVuelo"
 function App() {
   return (
     <BrowserRouter>
@@ -13,6 +14,7 @@ function App() {
                 <Route path="/register" element={<Register/>}/>
                 <Route path="/registrovuelos" element={<RegistroVuelos/>}/>
                 <Route path="/mostrarvuelos" element={<MostrarVuelos/>}/>
+                <Route path="/eliminarvuelo" element={<EliminarVuelo/>}/>
             </Routes>
         </BrowserRouter>
   );

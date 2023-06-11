@@ -62,12 +62,12 @@ routes.get("/showflights", (req, res)=>{
 })
 
 //Se usara mas adelante, borrar de ser necesario
-routes.delete("/:nombre", (req, res)=>{
+routes.delete("/deleteflight/:id", (req, res)=>{
     req.getConnection((err, conn)=>{
         if(err) return res.send(err)
-        conn.query('DELETE FROM users WHERE nombre=?', [req.params.nombre], (err, rows)=>{
+        conn.query('DELETE FROM vuelos WHERE id=?', [req.params.id], (err, rows)=>{
             if(err) return res.send(err)
-            res.send("Usuario eliminado")
+            res.send("Vuelo eliminado")
         })
     })
 })
