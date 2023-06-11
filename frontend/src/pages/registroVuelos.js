@@ -1,6 +1,5 @@
 import React, {useState} from "react"
 import axios from "axios"
-import {Link, useNavigate} from "react-router-dom"
 //Importas css
 export default function RegistroVuelo(){
     const [aerolinea, setAerolinea]= useState('')
@@ -10,7 +9,6 @@ export default function RegistroVuelo(){
     const [cantidad, setCantidad]= useState('')
     const [fechavuelo, setFechavuelo]= useState('')
     const [horasalida, setHorasalida]= useState('')
-    const navigate= useNavigate()
 
     const comprobarCambiosAerolinea = (event) => {
         setAerolinea(event.target.value)
