@@ -30,6 +30,7 @@ export default function Login(){
                 console.log("Respuesta del servidor: ", response2.data);
                 if(response2.data.encontrado){
                     alert("Inicio de sesion exitoso")
+                    localStorage.setItem("data", formEmail)
                     navigate("/mostrarvuelos")
                 }
             }

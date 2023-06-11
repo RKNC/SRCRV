@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react"
 import axios from "axios"
-import {Link, useNavigate} from "react-router-dom"
 //Importas css
 export default function MostrarVuelos(){
+    const [idVuelo, setIDVuelo]= useState(null)
     const [listavuelos, setListavuelos]=useState('')
     const getVuelos= async()=>{
         
@@ -13,7 +13,35 @@ export default function MostrarVuelos(){
     useEffect(()=>{
         getVuelos()
     })
+    const comprobarCambiosID = (event) => {
+        setIDVuelo(event.target.value)
+    }
     const vuelos= Object.values(listavuelos)
+    const reserveFlight= async (e) =>{
+        e.preventDefault();
+        try{
+            const index= vuelos.findIndex(i=>i.id==idVuelo)
+            const aerolinea=vuelos[index].aerolinea
+            const origen= vuelos[index].origen
+            const destino= vuelos[index].destino
+            const fechavuelo= vuelos[index].fechavuelo
+            const horasalida= vuelos[index].horasalida
+            const datareserva={
+                email: localStorage.getItem('data'),
+                aerolinea: aerolinea,
+                origen: origen,
+                destino: destino,
+                fechavuelo: fechavuelo,
+                horasalida: horasalida
+            }
+            const url= 'http://localhost:9000/api/reserveflight'
+            const {datareserva:res} = await axios.post(url, datareserva);
+            alert("Reserva realizada")
+        }catch(error){
+            console.error('Error al enviar la solicitud:', error);
+        }
+        
+    }
     
     return (
         <main>
@@ -42,13 +70,13 @@ export default function MostrarVuelos(){
                                     <td>{datos.precio}</td>
                                     <td>{datos.fechavuelo}</td>
                                     <td>{datos.horasalida}</td>
-                                    <td>
-                                        <button id="Reservar">Reservar Vuelo</button>
-                                    </td>
                                 </tr>
                         ))}
                     </tbody>
                 </table>
+                <h3>Elija el vuelo que quiera reservar</h3>
+                <input type="text" name="id" placeholder="ID del vuelo a reservar" onChange={comprobarCambiosID} required value={idVuelo}></input><br></br><br></br>
+                <button id="btnReserve" onClick={reserveFlight}>Reservar</button>
             </div>
         </main>
     )

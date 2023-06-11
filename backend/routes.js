@@ -61,7 +61,7 @@ routes.get("/showflights", (req, res)=>{
     })
 })
 
-//Se usara mas adelante, borrar de ser necesario
+
 routes.delete("/deleteflight/:id", (req, res)=>{
     req.getConnection((err, conn)=>{
         if(err) return res.send(err)
@@ -72,6 +72,17 @@ routes.delete("/deleteflight/:id", (req, res)=>{
     })
 })
 
+routes.post("/reserveflight", (req, res)=>{
+    req.getConnection((err, conn)=>{
+        if(err) return res.send(err)
+        conn.query('INSERT INTO reservas set ?', [req.body], (err, rows)=>{
+            if(err) return res.send(err)
+            res.send("Datos guardados")
+        })
+    })
+})
+
+//Se usara mas adelante, borrar de ser necesario
 routes.put("/:nombre", (req, res)=>{
     req.getConnection((err, conn)=>{
         if(err) return res.send(err)
