@@ -56,7 +56,7 @@ routes.get("/showflights", (req, res)=>{
         if(err) return res.send(err)
         conn.query('SELECT * FROM vuelos', [req.body], (err, results)=>{
             if(err) return res.send(err)
-            res.json(rows)
+            res.send(results)
         })
     })
 })

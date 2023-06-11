@@ -1,32 +1,46 @@
-import React, {useState} from "react"
+import React, {useEffect, useState} from "react"
 import axios from "axios"
 import {Link, useNavigate} from "react-router-dom"
 //Importas css
 export default function MostrarVuelos(){
-    const mostrarVuelos= async (e)=>{
-        const url='http://localhost:9000/api/showflights/'+email+'#'
-        const response = await axios.get(url);
+    const [listavuelos, setListavuelos]=useState('')
+    const getVuelos= async()=>{
+        
+        const url='http://localhost:9000/api/showflights/'
+        const {data}= await axios.get(url)
+        setListavuelos(data)
     }
-
-
-
-
+    useEffect(()=>{
+        getVuelos()
+    })
+    const vuelos= Object.values(listavuelos)
     
     return (
         <main>
             <h1>¿Qué vuelo elegiré hoy?</h1>
             <h3>Vuelos disponibles para su reserva</h3>
-            <div class="tabla">
-                <table id="listaVuelos" class="table table-striped table-bordered">
+            <div className="mostrarVuelos">
+                <table id="listaVuelos">
                     <thead>
                         <tr>
                             <th>Aerolínea</th>
-                            <th>Partida-Destino</th>
+                            <th>Partida</th>
+                            <th>Destino</th>
                             <th>Precio</th>
                         </tr>
                     </thead>
+                    <tbody>
+                        {vuelos.map((datos)=>(
+                                <tr>
+                                    <td>{datos.aerolinea}</td>
+                                    <td>{datos.origen}</td>
+                                    <td>{datos.destino}</td>
+                                    <td>{datos.precio}</td>
+                                </tr>
+                        ))}
+                    </tbody>
                 </table>
-            </div> 
+            </div>
         </main>
     )
 }
