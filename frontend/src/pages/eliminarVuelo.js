@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react"
 import axios from "axios"
+import {Link} from "react-router-dom"
 //Importas css
 
 export default function EliminarVuelo(){
@@ -12,7 +13,11 @@ export default function EliminarVuelo(){
     }
 
     useEffect(()=>{
-        getVuelos()
+        try{
+            getVuelos()
+        } catch(err){
+            console.log(err)
+        }
     })
     
     const comprobarCambiosID = (event) => {
@@ -29,6 +34,7 @@ export default function EliminarVuelo(){
 
     return(
         <body>
+            <Link to="/registrovuelos">Registrar un Vuelo</Link>
             <h1>Vuelos Registrados</h1>
             <table id="listaVuelos">
                     <thead>
@@ -46,14 +52,14 @@ export default function EliminarVuelo(){
                     <tbody>
                         {vuelos.map((datos)=>(
                                 <tr>
-                                    <td>{datos.id}</td>
-                                    <td>{datos.aerolinea}</td>
-                                    <td>{datos.origen}</td>
-                                    <td>{datos.destino}</td>
-                                    <td>{datos.precio}</td>
-                                    <td>{datos.cantidad}</td>
-                                    <td>{datos.fechavuelo}</td>
-                                    <td>{datos.horasalida}</td>
+                                    <td key={datos.id}>{datos.id}</td>
+                                    <td key={datos.id}>{datos.aerolinea}</td>
+                                    <td key={datos.id}>{datos.origen}</td>
+                                    <td key={datos.id}>{datos.destino}</td>
+                                    <td key={datos.id}>{datos.precio}</td>
+                                    <td key={datos.id}>{datos.cantidad}</td>
+                                    <td key={datos.id}>{datos.fechavuelo}</td>
+                                    <td key={datos.id}>{datos.horasalida}</td>
                                 </tr>
                         ))}
                     </tbody>

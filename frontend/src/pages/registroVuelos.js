@@ -1,5 +1,6 @@
 import React, {useState} from "react"
 import axios from "axios"
+import {Link} from "react-router-dom"
 //Importas css
 export default function RegistroVuelo(){
     const [aerolinea, setAerolinea]= useState('')
@@ -55,6 +56,7 @@ export default function RegistroVuelo(){
 
     return(
         <form onSubmit={guardarDatos}>
+        <Link to="/eliminarvuelo">Eliminar un Vuelo</Link>
         <h1>Registro de Vuelo</h1>
         <div class="contenedor-formulario">
             <div class="grupo-formulario">

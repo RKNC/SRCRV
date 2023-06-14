@@ -6,6 +6,7 @@ const cors= require("cors")
 const routes= require("./routes")
 
 const app= express();
+app.disable("x-powered-by")
 
 app.set("port", process.env.PORT || 9000)
 

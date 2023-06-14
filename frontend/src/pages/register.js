@@ -43,7 +43,8 @@ export default function Register(){
             console.log('Respuesta del servidor:', response1.data);
             if(!response1.data.encontrado){
                 const url2='http://localhost:9000/api/registeruser'
-                const {formData:res} = await axios.post(url2, formData);
+                const response = await axios.post(url2, formData);
+                console.log(response)
                 alert("Registro exitoso")
                 navigate("/login")
             }

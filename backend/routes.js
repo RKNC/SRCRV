@@ -1,7 +1,25 @@
 const express=require("express")
 const routes= express.Router()
+
+//Admins
+
 //Para los usuarios
 routes.get("/email/:email", (req, res)=>{
+    req.getConnection((err, conn)=>{
+        if(err) return res.send(err)
+        conn.query('SELECT * FROM users WHERE email=?',[req.params.email], (err, results)=>{
+            if(err) return res.send(err)
+            if(results.length>0){
+                res.json({encontrado:true})
+            }
+            else{
+                res.json({encontrado:false})
+            }
+        })
+    })
+})
+
+routes.get("/admemail/:email", (req, res)=>{
     req.getConnection((err, conn)=>{
         if(err) return res.send(err)
         conn.query('SELECT * FROM users WHERE email=?',[req.params.email], (err, results)=>{
