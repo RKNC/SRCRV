@@ -22,11 +22,11 @@ export default function Login(){
         const formPassword= password
         try {
             const url1='http://localhost:9000/api/email/'+formEmail+'#'
-            const response1 = await axios.get(url1, formEmail);
+            const response1 = await axios.get(url1);
             console.log('Respuesta del servidor:', response1.data);
             if(response1.data.encontrado){
                 const url2='http://localhost:9000/api/password/'+formPassword+'#'
-                const response2 = await axios.get(url2, formPassword);
+                const response2 = await axios.get(url2);
                 console.log("Respuesta del servidor: ", response2.data);
                 if(response2.data.encontrado){
                     alert("Inicio de sesion exitoso")
@@ -34,11 +34,12 @@ export default function Login(){
                     navigate("/mostrarvuelos")
                 }
             }
+            setEmail('');
+            setPassword('');
           } catch (error) {
             console.error('Error al enviar la solicitud:', error);
           }
-        setEmail('');
-        setPassword('');
+        
     };
 
     return(
