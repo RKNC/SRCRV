@@ -1,10 +1,12 @@
 import React, {useEffect, useState} from "react"
 import axios from "axios"
+import {useNavigate} from "react-router-dom"
 import "./Estilos/mostrarVuelos.css"
 //Importas css
 export default function MostrarVuelos(){
     const [idVuelo, setIDVuelo]= useState(null)
     const [listavuelos, setListavuelos]=useState('')
+    const navigate= useNavigate()
     const getVuelos= async()=>{
         
         const url='http://localhost:9000/api/showflights/'
@@ -28,17 +30,11 @@ export default function MostrarVuelos(){
             const origen= vuelos[index].origen
             const destino= vuelos[index].destino
             const precio= vuelos[index].precio
-            const datareserva={
-                email: localStorage.getItem('data'),
-                aerolinea: aerolinea,
-                origen: origen,
-                destino: destino,
-                precio: precio,
-            }
-            const url= 'http://localhost:9000/api/reserveflight'
-            const response = await axios.post(url, datareserva);
-            console.log(response)
-            alert("Reserva realizada")
+            localStorage.setItem("aerolineaReserva", aerolinea)
+            localStorage.setItem("origenReserva", origen)
+            localStorage.setItem("destinoReserva", destino)
+            localStorage.setItem("precioReserva", precio)
+            navigate("/reservaVuelos")
         }catch(error){
             console.error('Error al enviar la solicitud:', error);
         }
