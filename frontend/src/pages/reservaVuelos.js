@@ -1,9 +1,17 @@
-import React from "react"
+import React, {useState, useEffect} from "react"
+import UserHeader from "../components/userHeader"
 import axios from "axios"
 import {useNavigate} from "react-router-dom"
 
 export default function ReservaVuelos(){
     const navigate= useNavigate()
+    useEffect(()=>{
+        const userEmail= localStorage.getItem("data")
+        if(userEmail==null){
+            localStorage.clear()
+            navigate('/mainpage')
+        }
+    })
     const reserva={
         email: localStorage.getItem("data"),
         aerolinea: localStorage.getItem("aerolineaReserva"),
@@ -38,6 +46,7 @@ export default function ReservaVuelos(){
     return(
         <main>
             <html>
+                <UserHeader/>
                 <h3>Reserva incluida en el carrito</h3>
                 <h3>Confirme los datos antes de concretar la reserva: </h3>
                 <div className="DatosdelaReserva">

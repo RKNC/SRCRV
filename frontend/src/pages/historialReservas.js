@@ -1,8 +1,16 @@
 import React, {useEffect, useState} from "react"
+import { useNavigate } from "react-router-dom"
+import UserHeader from "../components/userHeader"
 import axios from "axios"
 
 export default function HistorialReservas(){
-    
+    const navigate= useNavigate()
+    useEffect(()=>{
+        const userEmail= localStorage.getItem("data")
+        if(userEmail==null){
+            navigate('/mainpage')
+        }
+    })
     const [idReserva, setIDReserva]= useState(null)
     const [listaReservas, setListaReservas]= useState('')
 
@@ -25,6 +33,7 @@ export default function HistorialReservas(){
     return(
         <main>
             <html>
+                <UserHeader/>
                 <h1>Bienvenido al menu de reservas realizadas</h1><br></br>
                 <h3>Aquí verás todas las reservas que hayas realizado con tu cuenta</h3>
                 <div className="historial">
