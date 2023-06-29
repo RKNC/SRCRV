@@ -4,7 +4,6 @@ import axios from "axios"
 export default function EstadisticasVuelos(){
     const[aerolineaBusqueda, setAerolineaBusqueda]= useState('')
     const [listavuelos, setListavuelos]=useState('')
-    const [vueloA, setvueloA]=useState('')
     const getVuelos= async()=>{
         const url='http://localhost:9000/api/showflights/'
         const {data}= await axios.get(url)
@@ -15,26 +14,45 @@ export default function EstadisticasVuelos(){
             console.log(error)
         })  
     })
+    const vuelos= Object.values(listavuelos)
     const comprobarCambiosAerolinea = (event) => {
         setAerolineaBusqueda(event.target.value)
     }
-    const vuelos= Object.values(listavuelos)
 
     const stats= async (e) =>{
         e.preventDefault();
-        const index= vuelos.findIndex(i=>i.aerolinea==aerolineaBusqueda)
-        const aerolineaA= vuelos[index].aerolinea
-        let ganancias=0;
         try{
-            const url= 'http://localhost:9000/api/calculate/'+aerolineaA+'#'
-            const {response} = await axios.get(url);
-            setvueloA(response)
-            const precios= Object.values(vueloA)
-            precios.forEach(function(a){ganancias+=a})
+            const url1= "http://localhost:9000/api/aerolinea/"+aerolineaBusqueda+"#"
+            const response1= await axios.get(url1)
+            const aeros= Object.values(response1.data)
+            const cantVuelos= aeros.length
+            
+            const url2= "http://localhost:9000/api/reservas/"+aerolineaBusqueda+"#"
+            const response2= await axios.get(url2)
+            
+            
+            const reservas= Object.values(response2.data)
+            console.log(response2.data)
+            let i=0
+            let ganancias=0
+            while(reservas[i]!=null){
+                ganancias+=reservas[i].precio
+                i++
+            }
+            alert(aerolineaBusqueda)
+            alert(cantVuelos)
             alert(ganancias)
+            alert(i)
+            localStorage.setItem("aerolinea", aerolineaBusqueda)
+            localStorage.setItem("cantidadVuelos", cantVuelos)
+            localStorage.setItem("cantidadReservas", i)
+            localStorage.setItem("ganancias", ganancias)
+            //TODO: Navigate a pagina de muestra
         }catch(error){
-            console.error('Error al enviar la solicitud:', error);
+            
         }
+        
+        setAerolineaBusqueda('')
     }
     
     return (

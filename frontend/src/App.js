@@ -11,6 +11,7 @@ import MostrarVuelos from "./pages/mostrarVuelos"
 import ReservaVuelos from "./pages/reservaVuelos"
 import HistorialReservas from "./pages/historialReservas"
 import EstadisticasVuelos from "./pages/estadisticasVuelos"
+import OpcionesUser from "./pages/opcionesUser"
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
                 <Route path="/reservavuelos" element={<ReservaVuelos/>}/>
                 <Route path="/reservas" element={<HistorialReservas/>}/>
                 <Route path="/estadisticas" element={<EstadisticasVuelos/>}/>
+                <Route path="/opciones" element={<OpcionesUser/>}/>
             </Routes>
         </BrowserRouter>
   );

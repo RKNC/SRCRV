@@ -30,10 +30,14 @@ export default function HistorialReservas(){
     }
     const reservas=Object.values(listaReservas)
 
+    const Atras=()=>{
+        navigate("/menuuser")
+    }
     return(
         <main>
             <html>
                 <UserHeader/>
+                <button onClick={Atras}>Atras</button>
                 <h1>Bienvenido al menu de reservas realizadas</h1><br></br>
                 <h3>Aquí verás todas las reservas que hayas realizado con tu cuenta</h3>
                 <div className="historial">
