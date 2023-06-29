@@ -34,24 +34,26 @@ export default function EstadisticasVuelos(){
             const response1= await axios.get(url1)
             const aeros= Object.values(response1.data)
             const cantVuelos= aeros.length
-            
-            const url2= "http://localhost:9000/api/reservas/"+aerolineaBusqueda+"#"
-            const response2= await axios.get(url2)
-            
-            
-            const reservas= Object.values(response2.data)
-            console.log(response2.data)
-            let i=0
-            let ganancias=0
-            while(reservas[i]!=null){
-                ganancias+=reservas[i].precio
-                i++
+            if(cantVuelos>0){
+                const url2= "http://localhost:9000/api/reservas/"+aerolineaBusqueda+"#"
+                const response2= await axios.get(url2)
+                const reservas= Object.values(response2.data)
+                console.log(response2.data)
+                let i=0
+                let ganancias=0
+                while(reservas[i]!=null){
+                    ganancias+=reservas[i].precio
+                    i++
+                }
+                localStorage.setItem("aerolinea", aerolineaBusqueda)
+                localStorage.setItem("cantidadVuelos", cantVuelos)
+                localStorage.setItem("cantidadReservas", i)
+                localStorage.setItem("ganancias", ganancias)
+                navigate("/mostrarestadisticas")
             }
-            localStorage.setItem("aerolinea", aerolineaBusqueda)
-            localStorage.setItem("cantidadVuelos", cantVuelos)
-            localStorage.setItem("cantidadReservas", i)
-            localStorage.setItem("ganancias", ganancias)
-            navigate("/mostrarestadisticas")
+            else{
+                alert("No existen vuelos con esa aerolinea en el registro")
+            }
         }catch(error){
             console.log("Respuesta del servidor: "+error)
         }

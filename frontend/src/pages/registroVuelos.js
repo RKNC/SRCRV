@@ -59,6 +59,13 @@ export default function RegistroVuelo(){
             const {response}= await axios.post(url, formData)
             console.log(response)
             alert("Registro exitoso")
+            setAerolinea('')
+            setCantidad('')
+            setDestino('')
+            setFechavuelo('')
+            setHorasalida('')
+            setOrigen('')
+            setPrecio('')
         }catch(error){
             console.error('Error al enviar la solicitud:', error);
         }

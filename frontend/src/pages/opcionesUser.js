@@ -50,11 +50,17 @@ export default function OpcionesUser(){
         email: localStorage.getItem("data"),
         numero: localStorage.getItem("numero")
     } 
+    
+    const Atras=()=>{
+        navigate("/menuuser")
+    }
+    
     return(
         <body>
             <main>
                 <html>
                     <UserHeader/>
+                    <button onClick={Atras}>Atras</button>
                     <h2>Datos actuales de la cuenta</h2>
                     <div className="contenedor_Datos">
                         <h2>Información de la cuenta:</h2>
