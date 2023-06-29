@@ -1,8 +1,16 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function MostrarEstadisticas(){
     const navigate= useNavigate()
+
+    useEffect(()=>{
+        const adminEmail= localStorage.getItem("admin")
+        if(adminEmail==null){
+            navigate('/loginadmin')
+        }
+    })
+
     const vuelo={
         aerolinea: localStorage.getItem("aerolinea"),
         cantidad: localStorage.getItem("cantidadVuelos"),
@@ -11,6 +19,10 @@ export default function MostrarEstadisticas(){
     }
 
     const Atras=()=>{
+        localStorage.removeItem("aerolinea")
+        localStorage.removeItem("cantidadVuelos")
+        localStorage.removeItem("cantidadReservas")
+        localStorage.removeItem("ganancias")
         navigate("/estadisticas")
     }
 

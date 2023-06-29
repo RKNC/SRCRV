@@ -6,6 +6,12 @@ export default function EstadisticasVuelos(){
     const[aerolineaBusqueda, setAerolineaBusqueda]= useState('')
     const [listavuelos, setListavuelos]=useState('')
     const navigate= useNavigate()
+    useEffect(()=>{
+        const adminEmail= localStorage.getItem("admin")
+        if(adminEmail==null){
+            navigate('/loginadmin')
+        }
+    })
     const getVuelos= async()=>{
         const url='http://localhost:9000/api/showflights/'
         const {data}= await axios.get(url)
@@ -41,10 +47,6 @@ export default function EstadisticasVuelos(){
                 ganancias+=reservas[i].precio
                 i++
             }
-            alert(aerolineaBusqueda)
-            alert(cantVuelos)
-            alert(ganancias)
-            alert(i)
             localStorage.setItem("aerolinea", aerolineaBusqueda)
             localStorage.setItem("cantidadVuelos", cantVuelos)
             localStorage.setItem("cantidadReservas", i)
@@ -56,10 +58,15 @@ export default function EstadisticasVuelos(){
         
         setAerolineaBusqueda('')
     }
-    
+
+    const Atras=()=>{
+        navigate("/menuadmin")
+    }
+
     return (
         <main>
             <html>
+                <button onClick={Atras}>Retornar</button>
                 <h1>Lista de aerolineas que actualmente se encuentran registradas en FlyEasy</h1>
                 <div className="mostrarAerolineas">
                     <table id="listaAerolineas">
