@@ -10,8 +10,9 @@ import EliminarVuelo from "./pages/eliminarVuelo"
 import MostrarVuelos from "./pages/mostrarVuelos"
 import ReservaVuelos from "./pages/reservaVuelos"
 import HistorialReservas from "./pages/historialReservas"
-import EstadisticasVuelos from "./pages/estadisticasVuelos"
 import OpcionesUser from "./pages/opcionesUser"
+import EstadisticasVuelos from "./pages/estadisticasVuelos"
+import MostrarEstadisticas from "./pages/mostrarEstadisticas"
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
                 <Route path="/reservas" element={<HistorialReservas/>}/>
                 <Route path="/estadisticas" element={<EstadisticasVuelos/>}/>
                 <Route path="/opciones" element={<OpcionesUser/>}/>
+                <Route path="/mostrarestadisticas" element={<MostrarEstadisticas/>}/>
             </Routes>
         </BrowserRouter>
   );

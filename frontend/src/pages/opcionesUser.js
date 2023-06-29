@@ -58,10 +58,10 @@ export default function OpcionesUser(){
                     <h2>Datos actuales de la cuenta</h2>
                     <div className="contenedor_Datos">
                         <h2>Información de la cuenta:</h2>
-                        <h3>{user.nombre}</h3>
-                        <h3>{user.apellido}</h3>
-                        <h3>{user.email}</h3>
-                        <h3>{user.numero}</h3>
+                        <h3>Nombre del usuario: {user.nombre}</h3>
+                        <h3>Apellido del usuario: {user.apellido}</h3>
+                        <h3>Email del usuario: {user.email}</h3>
+                        <h3>Numero telefonico del usuario: {user.numero}</h3>
                     </div>
                     <button onClick={actualizarDatos}>Actualizar datos</button>
                     <button onClick={eliminarUsuario}>Eliminar cuenta</button>
