@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react"
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import UserHeader from "../components/userHeader"
 import axios from "axios"
 
@@ -30,6 +30,24 @@ export default function HistorialReservas(){
     }
     const reservas=Object.values(listaReservas)
 
+    const Historial= async (e)=>{
+        e.preventDefault()
+        try{
+            const index= reservas.findIndex(i=>i.id==idReserva)
+            const aerolinea=reservas[index].aerolinea
+            const origen= reservas[index].origen
+            const destino= reservas[index].destino
+            const precio= reservas[index].precio
+            localStorage.setItem("idReserva", idReserva)
+            localStorage.setItem("aerolineaReserva", aerolinea)
+            localStorage.setItem("origenReserva", origen)
+            localStorage.setItem("destinoReserva", destino)
+            localStorage.setItem("precioReserva", precio)
+            navigate("/historial")
+        }catch(error){
+            console.error('Error al enviar la solicitud:', error);
+        }
+    }
     const Atras=()=>{
         navigate("/menuuser")
     }
@@ -64,7 +82,7 @@ export default function HistorialReservas(){
                         </tbody>
                     </table>
                     <input type="text" name="id" placeholder="ID de la reserva a observar" onChange={comprobarCambiosID} required value={idReserva}></input><br></br><br></br>
-                    <button id="btnHistory">Ver historial completo</button>
+                    <button id="btnHistory" onClick={Historial}>Ver historial completo</button>
                 </div>
             </html>
         </main>

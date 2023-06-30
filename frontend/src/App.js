@@ -10,6 +10,7 @@ import EliminarVuelo from "./pages/eliminarVuelo"
 import MostrarVuelos from "./pages/mostrarVuelos"
 import ReservaVuelos from "./pages/reservaVuelos"
 import HistorialReservas from "./pages/historialReservas"
+import Historial from "./pages/historial"
 import OpcionesUser from "./pages/opcionesUser"
 import EstadisticasVuelos from "./pages/estadisticasVuelos"
 import MostrarEstadisticas from "./pages/mostrarEstadisticas"
@@ -29,6 +30,7 @@ function App() {
                 <Route path="/mostrarvuelos" element={<MostrarVuelos/>}/>
                 <Route path="/reservavuelos" element={<ReservaVuelos/>}/>
                 <Route path="/reservas" element={<HistorialReservas/>}/>
+                <Route path="/historial" element={<Historial/>}/>
                 <Route path="/estadisticas" element={<EstadisticasVuelos/>}/>
                 <Route path="/opciones" element={<OpcionesUser/>}/>
                 <Route path="/mostrarestadisticas" element={<MostrarEstadisticas/>}/>
