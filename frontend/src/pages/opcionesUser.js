@@ -32,13 +32,15 @@ export default function OpcionesUser(){
         })  
     })
     const actualizarDatos= async (e)=>{
-
+        navigate("/opciones")
     }
     const eliminarUsuario= async (e)=>{
         const email= localStorage.getItem("data")
-        const url= "http://localhost:9000/api/delete/"+email+"#"
-        const response= await axios.delete(url)
-        console.log(response)
+        const url1= "http://localhost:9000/api/delete/"+email+"#"
+        const response1= await axios.delete(url1)
+        const url2= "http://localhost:9000/api/borrarreservas/"+email+"#"
+        const response2= await axios.delete(url2)
+        console.log(response1, response2)
         localStorage.clear()
         alert("Cuenta eliminada con éxito")
         navigate("/mainpage")

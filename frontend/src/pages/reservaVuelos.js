@@ -51,10 +51,10 @@ export default function ReservaVuelos(){
                 <h3>Reserva incluida en el carrito</h3>
                 <h3>Confirme los datos antes de concretar la reserva: </h3>
                 <div className="DatosdelaReserva">
-                    <h3>{reserva.aerolinea}</h3>
-                    <h3>{reserva.origen}</h3>
-                    <h3>{reserva.destino}</h3>
-                    <h3>{reserva.precio}</h3>
+                    <h3>Aerolinea: {reserva.aerolinea}</h3>
+                    <h3>Origen: {reserva.origen}</h3>
+                    <h3>Destino: {reserva.destino}</h3>
+                    <h3>Precio: {reserva.precio}</h3>
                 </div>
                 <h3>En caso de tener todo en orden, confirmar la compra</h3>
                 <button id="Reservar" onClick={ReservarVuelo}>Reservar</button>

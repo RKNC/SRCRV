@@ -175,7 +175,17 @@ routes.get("/reservasuser/:email", (req, res)=>{
 routes.delete("/cancelar/:id", (req, res)=>{
     req.getConnection((err, conn)=>{
         if(err) return res.send(err)
-        conn.query('DELETE * FROM reservas WHERE id= ?', [req.params.email], (err, results)=>{
+        conn.query('DELETE FROM reservas WHERE id= ?', [req.params.id], (err, results)=>{
+            if(err) return res.send(err)
+            res.send("Reserva cancelada")
+        })
+    })
+})
+
+routes.delete("/borrarreservas/:email", (req, res)=>{
+    req.getConnection((err, conn)=>{
+        if(err) return res.send(err)
+        conn.query('DELETE FROM reservas WHERE email= ?', [req.params.email], (err, results)=>{
             if(err) return res.send(err)
             res.send("Reserva cancelada")
         })
