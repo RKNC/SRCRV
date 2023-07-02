@@ -34,16 +34,21 @@ export default function HistorialReservas(){
         e.preventDefault()
         try{
             const index= reservas.findIndex(i=>i.id==idReserva)
-            const aerolinea=reservas[index].aerolinea
-            const origen= reservas[index].origen
-            const destino= reservas[index].destino
-            const precio= reservas[index].precio
-            localStorage.setItem("idReserva", idReserva)
-            localStorage.setItem("aerolineaReserva", aerolinea)
-            localStorage.setItem("origenReserva", origen)
-            localStorage.setItem("destinoReserva", destino)
-            localStorage.setItem("precioReserva", precio)
-            navigate("/historial")
+            if(idReserva[index]==null){
+                alert("No hay reservas con este ID")
+            }
+            else{
+                const aerolinea=reservas[index].aerolinea
+                const origen= reservas[index].origen
+                const destino= reservas[index].destino
+                const precio= reservas[index].precio
+                localStorage.setItem("idReserva", idReserva)
+                localStorage.setItem("aerolineaReserva", aerolinea)
+                localStorage.setItem("origenReserva", origen)
+                localStorage.setItem("destinoReserva", destino)
+                localStorage.setItem("precioReserva", precio)
+                navigate("/historial")
+            }
         }catch(error){
             console.error('Error al enviar la solicitud:', error);
         }
